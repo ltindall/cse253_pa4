@@ -7,7 +7,7 @@ good blog on rnn's: http://karpathy.github.io/2015/05/21/rnn-effectiveness/
 good blog on lstm's: http://colah.github.io/posts/2015-08-Understanding-LSTMs/  
 
 
-useful code repos: 
+useful code repos:  
 https://github.com/spro/practical-pytorch/tree/master/char-rnn-generation  
 The repo above has some problems. One epoch only trains over a single random 
 sequence from the text. It doesn't use batches.  
