@@ -1,5 +1,6 @@
 import numpy as np
 import hyperparameters as h
+from collections import deque
 
 def load_music(file_name, use_custom=False):
     """
@@ -16,9 +17,16 @@ def load_music(file_name, use_custom=False):
         content = file.read()
 
     if use_custom:
+        print('Using custom starts and ends...')
+        h.use_custom_startend = True
         content = replace_startend(content, h.start_sub, h.end_sub)
-    
+    else:
+        # hyperparameter flag for generate (whether we need to put start end)
+        h.use_custom_startend = False
+
     unique = sorted(set(content))
+    print('There are {} unique characters in this dataset\n'.format(len(unique)))
+
     char_to_int = {}
     int_to_char = {}
     for i,ch in enumerate(unique):
@@ -82,8 +90,8 @@ def create_batch(inputs, permuted_list, batch_size, sequence_size):
 
 def replace_startend(input_str, start, end):
     """
-    Replaces the <start> and <end> tags with special chars 
-    
+    Replaces the <start> and <end> tags with special chars
+
     input:
         <str> input_str: the input string to parse and replace
         <char> start: the special char to replace <start>
@@ -92,4 +100,68 @@ def replace_startend(input_str, start, end):
         <str> the updated string
     """
     return input_str.replace('<start>', start).replace('<end>', end)
-    
+
+
+def monotonic_increase(some_list):
+    """
+    checks if every element in the list is monotonically increasing
+
+    input:
+        <list> some_list: the list to check
+    return:
+        <bool> True or False
+    """
+    return all(x<y for x, y in zip(some_list, some_list[1:]))
+
+
+def shift_list(li, new_item):
+    """
+    Adds the new item to the end of the list and shifts it to retain original size
+    drops the first n elements of list, where n is the length of new_item
+
+    input:
+        <list> li: the list to append to
+        <iterable> or <int> new_item: the stuff you want to append
+    return:
+        <list> copy of modified list, or None if new_item is longer than li
+    """
+    try:
+        shift = len(new_item)
+    except TypeError:
+        new_item = [new_item]
+        shift = len(new_item)
+
+    if shift > len(li):
+        return None
+    # negative input is rotate left
+
+    dq = deque(li)
+    dq.rotate(-shift)
+
+    updated_li = list(dq)
+    updated_li[-shift:] = new_item
+    return updated_li
+
+
+# handy print statement for debugging loops
+class print_utils():
+    def __init__(self):
+        self.counter = 0;
+
+    def print_n_times(self, *args, times=1, **kwargs):
+        """
+        tool to print n times in a loop without ifs
+
+        input:
+            <list> args: standard arguments passed to print
+            <int> times: number of times this print statement will be executed
+            <dict> kwargs: standard keyword arguments passed to print
+        """
+        if self.counter >= times:
+            return
+        else:
+            self.counter += 1
+            print(*args, **kwargs)
+
+    def reset_counter(self, num=0):
+        self.counter = num
