@@ -14,7 +14,15 @@ def load_music(file_name):
     with open('../data/{}'.format(file_name), 'r') as file:
         content = file.read()
 
-    return list(map(ord, content))
+    unique = sorted(set(content))
+
+    char_to_int = {}
+    for i,ch in enumerate(unique):
+        char_to_int[ch] = i
+
+    converted = [char_to_int[ch] for ch in content]
+
+    return converted
 
 
 def permute_list(num_chars, sequence_size):
