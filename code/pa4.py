@@ -19,7 +19,7 @@ print("GPU enabled = ",GPU)
 
 
 class lstm_char_rnn(torch.nn.Module):
-  def __init__(self, dict_size, batch_size, hidden_size, num_hidden_layers, output_size):
+  def __init__(self, dict_size, hidden_size, num_hidden_layers, output_size):
     super(lstm_char_rnn, self).__init__()
 
     self.hidden_size = hidden_size
@@ -38,7 +38,7 @@ class lstm_char_rnn(torch.nn.Module):
     return output, hidden
 
   def initialize_hidden(self):
-    return Variable(torch.zeros(self.num_hidden_layers, batch_size, self.hidden_size))
+    return Variable(torch.zeros(self.num_hidden_layers, 1, self.hidden_size))
 
 
 
@@ -62,17 +62,17 @@ def lstm_char_rnn(input_size, hidden_size, num_hidden_layers, output_size):
 '''
 
 ### Generic train method 
-def train(model, optimizer, epochs, train_data): 
+def train(model, optimizer, epochs, mini_batch): 
 
   for i in range(epochs): 
 
-    for batch in train_data: 
+    for seq in mini_batch: 
       model.train(True)
 
       # split batch into inputs and targets
-      inputs = Variable(torch.LongTensor(batch[:-1])).view(25,-1)
+      inputs = Variable(torch.LongTensor(seq[:-1])).view(25,-1)
       print("inputs shape = ",inputs)
-      targets = Variable(torch.LongTensor(batch[1:]))
+      targets = Variable(torch.LongTensor(seq[1:]))
       if GPU: 
         inputs = inputs.cuda()
         targets = targets.cuda()
@@ -114,13 +114,13 @@ dict_size = len(set(inputs))
 
 print("dict_size = ",dict_size)
 #batch_size = int(len(inputs)/sequence_length)
-batch_size = 1
+mini_batch_size = 10
 
 # get a list of start indices based on the inputs
 pm_arr = utils.permute_list(len(inputs), sequence_length+1)
 
 # create a batch based on the permute array (do this with a while loop in the epoch)
-batch, ids = utils.create_batch(inputs, pm_arr, batch_size, sequence_length+1)
+batch, ids = utils.create_batch(inputs, pm_arr, mini_batch_size, sequence_length+1)
 print(batch.shape)
 
 
@@ -128,7 +128,7 @@ print(batch.shape)
 
 
 # LSTM model 
-lstm = lstm_char_rnn(dict_size, batch_size, hidden_size, num_hidden_layers, dict_size)
+lstm = lstm_char_rnn(dict_size,hidden_size, num_hidden_layers, dict_size)
 hidden = lstm.initialize_hidden()
 print("hidden size = ",hidden.size())
 
