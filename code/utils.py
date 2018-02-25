@@ -56,16 +56,20 @@ def create_batch(inputs, permuted_list, batch_size, sequence_size):
         <int> sequence_size: the size of the sequence
     return:
         <np.array> batch_size x sequence_size from the inputs
+        <np.array> the target sequences
         None if not enough data for a batch
     """
     batch = []
+    targets = []
     start_idxs = []
     for i in range(batch_size):
         if permuted_list:
             start_idx = permuted_list.pop()
             sequence = inputs[start_idx:start_idx+sequence_size]
+            target = inputs[start_idx+1:start_idx+sequence_size+1]
             batch.append(sequence)
-            start_idxs.append(start_idx)
+            targets.append(target)
+            start_idxs.append(start_idx) # don't really need this, just for debugging
         else:
             return None
-    return np.array(batch), start_idxs
+    return np.array(batch), np.array(targets), start_idxs
