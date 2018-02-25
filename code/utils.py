@@ -3,7 +3,7 @@ import numpy as np
 def load_music(file_name):
     """
     loads the music file so that it becomes a list of ints
-    based on the ascii value of each character
+    enumerated based on ascii order
     
     input: filename <string>
     return: 
@@ -22,20 +22,26 @@ def load_music(file_name):
 
     converted = [char_to_int[ch] for ch in content]
 
-    return converted
+    return converted, char_to_int
 
 
-def permute_list(num_chars, sequence_size):
+def permute_list(num_chars, sequence_size, overlap=True):
     """
     Creates a random permutation of the input list to use in an epoch
     
     inputs:
         <int> num_chars: the number of characters in the data text
         <int> sequence_size: the size of the chunks of the sequence
+        <boolean> overlap: whether we want the sequences to overlap
     return:    
         <list> list of numbers in a random sequence permutation
     """
-    valid_starts = num_chars - sequence_size
+    if overlap:
+        valid_starts = num_chars - sequence_size
+    else:
+        last_valid = num_chars - sequence_size
+        valid_starts = np.arange(0,last_valid,sequence_size-1)
+        
     return list(np.random.permutation(valid_starts))
 
 
