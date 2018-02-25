@@ -17,28 +17,28 @@ loss_function = torch.nn.CrossEntropyLoss()
 GPU = torch.cuda.is_available()
 print("GPU enabled = ",GPU)
 
-torch.cuda.set_device(0)
+
 class lstm_char_rnn(torch.nn.Module):
-  def __init__(self, input_size, hidden_size, num_hidden_layers, output_size):
+  def __init__(self, dict_size, batch_size, hidden_size, num_hidden_layers, output_size):
     super(lstm_char_rnn, self).__init__()
 
-    self.input_size = input_size
     self.hidden_size = hidden_size
     self.num_hidden_layers = num_hidden_layers
     self.output_size = output_size
 
-    self.encoder = torch.nn.Embedding(input_size, hidden_size)
+    self.encoder = torch.nn.Embedding(dict_size, hidden_size)
     self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers)
     self.decoder = torch.nn.Linear(hidden_size, output_size)
 
   def forward(self, inputs, hidden):
     embedding_output = self.encoder(inputs)
     recurrent_output, hidden = self.recurrent(embedding_output, hidden)
-    output = self.decoder(recurrent_output)
+    output = self.decoder(recurrent_output.view(recurrent_output.size(0) * recurrent_output.size(1), recurrent_output.size(2)))
+    
     return output, hidden
 
   def initialize_hidden(self):
-    return Variable(torch.zeros(self.num_hidden_layers, self.input_size, self.hidden_size))
+    return Variable(torch.zeros(self.num_hidden_layers, batch_size, self.hidden_size))
 
 
 
@@ -70,7 +70,7 @@ def train(model, optimizer, epochs, train_data):
       model.train(True)
 
       # split batch into inputs and targets
-      inputs = Variable(torch.LongTensor(batch[:-1])).view(-1,25)
+      inputs = Variable(torch.LongTensor(batch[:-1])).view(25,-1)
       print("inputs shape = ",inputs)
       targets = Variable(torch.LongTensor(batch[1:]))
       if GPU: 
@@ -78,8 +78,10 @@ def train(model, optimizer, epochs, train_data):
         targets = targets.cuda()
 
       print("inputs type = ",type(inputs))
-      outputs = model(inputs,hidden)
+      outputs,_ = model(inputs,hidden)
 
+      print("outputs = ",outputs)
+      print("targets = ",targets)
       loss = loss_function(outputs, targets)
 
       optimizer.zero_grad()
@@ -107,8 +109,10 @@ epochs = 10
 # load the inputs as a list of ints
 inputs = utils.load_music('input.txt') # full input.txt is 501470 in length
 
+dict_size = len(set(inputs))
 
-print("len(inputs) = ",len(inputs))
+
+print("dict_size = ",dict_size)
 #batch_size = int(len(inputs)/sequence_length)
 batch_size = 1
 
@@ -124,7 +128,7 @@ print(batch.shape)
 
 
 # LSTM model 
-lstm = lstm_char_rnn(input_size, hidden_size, num_hidden_layers, output_size)
+lstm = lstm_char_rnn(dict_size, batch_size, hidden_size, num_hidden_layers, dict_size)
 hidden = lstm.initialize_hidden()
 print("hidden size = ",hidden.size())
 
@@ -133,4 +137,4 @@ if GPU:
   lstm.cuda()
 optimizer_lstm = torch.optim.Adam(lstm.parameters(), lr = 0.01)
 
-train(lstm, optimizer_lstm, 1, batch)
+train(lstm, optimizer_lstm, epochs, batch)
