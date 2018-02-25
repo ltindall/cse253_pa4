@@ -1,6 +1,7 @@
 import numpy as np
+import hyperparameters as h
 
-def load_music(file_name):
+def load_music(file_name, use_custom=False):
     """
     loads the music file so that it becomes a list of ints
     enumerated based on ascii order
@@ -14,8 +15,10 @@ def load_music(file_name):
     with open('../data/{}'.format(file_name), 'r') as file:
         content = file.read()
 
+    if use_custom:
+        content = replace_startend(content, h.start_sub, h.end_sub)
+    
     unique = sorted(set(content))
-
     char_to_int = {}
     for i,ch in enumerate(unique):
         char_to_int[ch] = i
@@ -73,3 +76,18 @@ def create_batch(inputs, permuted_list, batch_size, sequence_size):
         else:
             return None, None, None
     return np.array(batch).T, np.array(targets).T, start_idxs
+
+
+def replace_startend(input_str, start, end):
+    """
+    Replaces the <start> and <end> tags with special chars 
+    
+    input:
+        <str> input_str: the input string to parse and replace
+        <char> start: the special char to replace <start>
+        <char> end: the special char to replace <end>
+    return:
+        <str> the updated string
+    """
+    return input_str.replace('<start>', start).replace('<end>', end)
+    
