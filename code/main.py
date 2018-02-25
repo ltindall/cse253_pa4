@@ -7,7 +7,7 @@ import hyperparameters as h # this prints GPU enabled = True
 
 files = ['sample-music.txt', 'input.txt']
 # load the inputs as a list of ints
-inputs, char2int_cypher, int2char_cypher = utils.load_music(files[0], use_custom=True)
+inputs, char2int_cypher, int2char_cypher = utils.load_music(files[1], use_custom=True)
 # full input.txt is 501470 in length
 dict_size = len(char2int_cypher) # conversion is the dict convert char to int
 
@@ -31,10 +31,16 @@ if h.GPU:
 optimizer_lstm = torch.optim.Adam(lstm.parameters(), lr=0.01)
 
 #train(model, optimizer, epochs, train_inputs, validation_set, chunk_size, hidden0)
-best_model_dict = my_models.train(lstm, optimizer_lstm, h.epochs, training_set,
-                                  validation_set, h.sequence_length, init_hidden)
+mods = my_models.train(lstm, optimizer_lstm, h.epochs, training_set,
+                       validation_set, h.sequence_length, init_hidden, force_epochs=True)
+
+best_model_dict = mods[0]
+last_model_dict = mods[1]
 
 # save the best model dict to file in case we want to load it later and generate
 torch.save(best_model_dict, h.save_file)
+torch.save(last_model_dict, h.save_file_progress)
 
-my_models.generate('pa4_model', lstm, optimizer_lstm, h.temperature, h.prediction_length)
+my_models.generate(h.save_file, lstm, h.temperature, h.prediction_length)
+
+my_models.generate(h.save_file_progress, lstm, h.temperature, h.prediction_length)

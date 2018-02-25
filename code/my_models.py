@@ -71,9 +71,9 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
         # it shouldn't matter if we shuffle validation set after each epoch...
         # would be more work if I tried to keep it constant
         validation_indices = utils.permute_list(len(validation_set),
-                                            chunk_size+1, overlap=True)
+                                                chunk_size+1, overlap=h.overlap_data)
         permuted_train_indices = utils.permute_list(len(train_set),
-                                                    chunk_size+1, overlap=True)
+                                                    chunk_size+1, overlap=h.overlap_data)
         for phase, phase_name in enumerate(phases):
             # some preprocessing to set parameters for training or validation
             data = sets[phase]
@@ -101,8 +101,9 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
                     break
 
                 # debug code here (progress)
-                if batch_num%10000 == 0:
-                    print("batch sequence {}-{}".format(batch_num, batch_num+batch_size))
+                if batch_num%1000 == 0:
+                    print("Working on sequence {}-{}".format(batch_size * batch_num, 
+                                                             batch_size * (batch_num+batch_size)))
                 batch_num += 1
 
                 # split batch into inputs and targets
@@ -116,14 +117,14 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
                 outputs,_ = model(inputs, hidden0)
                 loss = h.loss_function(outputs, targets)
 
-                # reset gradients, backprop, and optimize
+                optimizer.zero_grad()
+                # backprop, and optimize
                 if phase_name == 'training':
-                    optimizer.zero_grad()
                     loss.backward() # propagate the error
                     optimizer.step()
 
                 # normalize loss by the batchsize * chunk_size per batch
-                running_loss += loss.data[0] / outputs.size(0)
+                running_loss += loss.data[0]
 
             # calculate the epoch loss, normalized by the number of batches
             if not force_epochs:
@@ -132,7 +133,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
                 losses[phase_name] = utils.shift_list(losses[phase_name],
                                                       running_loss/batch_num)
 
-            print('{} Loss:\t{:.4f}\n'.format(phase_name, losses[phase_name][-1]))
+            print('{} Loss:\t{}\n'.format(phase_name, losses[phase_name][-1]))
             # validation phase model saving, and early stopping
             if phase_name == 'validation':
                 # set the best loss to the first loss if we've never set it
@@ -156,6 +157,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
                     if utils.monotonic_increase(splice):
                         stop_flag = True
 
+        last_model_state = copy.deepcopy(model.state_dict())
         if stop_flag:
             # early stopping, get out of the epochs loop too
             print('Validation set Loss increased {} times in a row!'.format(h.stop_criterion))
@@ -168,11 +170,11 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
             break
 
-    return best_model_state
+    return best_model_state, last_model_state
 
 
 ### Generic train method
-def generate(model_filepath, model, optimizer, temperature, prediction_length):
+def generate(model_filepath, model, temperature, prediction_length):
 
     if os.path.exists(model_filepath):
         model.load_state_dict(torch.load(model_filepath))
@@ -201,7 +203,6 @@ def generate(model_filepath, model, optimizer, temperature, prediction_length):
 
         output, generate_hidden = model(input_char, generate_hidden)
 
-
     output_char = first_chars[-1]
     output_int = h.char2int_cypher[output_char]
     predicted_chars = first_chars
@@ -214,12 +215,11 @@ def generate(model_filepath, model, optimizer, temperature, prediction_length):
 
         #???????
         softmax_dist = torch.nn.functional.softmax(output/temperature)
-        output_int = int(torch.multinomial(softmax_dist,1)[0])
+        output_int = int(torch.multinomial(softmax_dist,1).cpu().data[0].numpy())       
 
         output_char = h.int2char_cypher[output_int]
         predicted_chars += output_char
 
-
-    print("final output = ",predicted_chars)
+    print("final output = ", predicted_chars)
     return 1
 
