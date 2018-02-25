@@ -17,12 +17,14 @@ def load_music(file_name):
     unique = sorted(set(content))
 
     char_to_int = {}
+    int_to_char = {}
     for i,ch in enumerate(unique):
         char_to_int[ch] = i
+        int_to_char[i] = ch
 
     converted = [char_to_int[ch] for ch in content]
 
-    return converted, char_to_int
+    return converted, char_to_int, int_to_char
 
 
 def permute_list(num_chars, sequence_size, overlap=True):

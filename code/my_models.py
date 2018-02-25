@@ -3,6 +3,7 @@ from torch.autograd import Variable
 import numpy as np
 import utils
 import hyperparameters as h
+import os
 
 
 class lstm_char_rnn(torch.nn.Module):
@@ -37,7 +38,7 @@ def train(model, optimizer, epochs, train_inputs, chunk_size, hidden0):
 
     for i in range(epochs):
         print("training epoch ",i)
-        pm_list = utils.permute_list(len(train_inputs), chunk_size+1, overlap=False)
+        pm_list = utils.permute_list(len(train_inputs), chunk_size+1, overlap=True)
 
 
         # there is no do-while loop in python...
@@ -77,3 +78,52 @@ def train(model, optimizer, epochs, train_inputs, chunk_size, hidden0):
     torch.save(model.state_dict(), 'pa4_model')
 
     return 1
+
+
+### Generic train method
+def generate(model_filepath, model, optimizer, train_inputs, temperature, prediction_length):
+
+    if os.path.exists(model_filepath):
+        model.load_state_dict(torch.load(model_filepath))
+    else:
+        raise ValueError('Model file not found.')
+
+    # zero out hidden weights to prime the network
+    model.batch_size = 1
+    generate_hidden = model.initialize_hidden()
+
+    if h.GPU:
+        generate_hidden = generate_hidden.cuda()
+
+    model.train(False)
+
+    # prime the network
+    first_chars = '<start>'
+    for ch in first_chars:
+        input_char = Variable(torch.LongTensor([h.char2int_cypher[ch]])).view(1,-1)
+        if h.GPU:
+            input_char = input_char.cuda()
+
+        output, generate_hidden = model(input_char, generate_hidden)
+
+
+    output_char = first_chars[-1]
+    output_int = h.char2int_cypher[output_char]
+    predicted_chars = first_chars
+    for i in range(prediction_length):
+        input_char = Variable(torch.LongTensor([output_int])).view(1, -1)
+        if h.GPU:
+            input_char = input_char.cuda()
+
+        output, generate_hidden = model(input_char, generate_hidden)
+
+        softmax_dist = torch.nn.functional.softmax(output/temperature)
+        output_int = int(torch.multinomial(softmax_dist,1)[0])
+
+        output_char = h.int2char_cypher[output_int]
+        predicted_chars += output_char
+
+
+    print("final output = ",predicted_chars)
+    return 1
+
