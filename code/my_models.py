@@ -4,7 +4,7 @@ import utils
 import hyperparameters as h
 import copy
 import os
-
+import numpy as np
 
 class lstm_char_rnn(torch.nn.Module):
     def __init__(self, dict_size, hidden_size, num_hidden_layers, batch_size):
@@ -24,7 +24,7 @@ class lstm_char_rnn(torch.nn.Module):
         output = self.decoder(recurrent_output.view(recurrent_output.size(0)*recurrent_output.size(1),
                                                     recurrent_output.size(2)))
 
-        return output, hidden
+        return output, hidden, recurrent_output
 
     def initialize_hidden(self):
         return Variable(torch.zeros(self.num_hidden_layers, self.batch_size,
@@ -114,7 +114,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
                     targets = targets.cuda()
 
                 # sketch but i guess it works? Reset for each new sequence batch
-                outputs,_ = model(inputs, hidden0)
+                outputs,_,_ = model(inputs, hidden0)
                 loss = h.loss_function(outputs, targets)
 
                 optimizer.zero_grad()
@@ -174,13 +174,9 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
 
 ### Generic train method
-def generate(model_filepath, model, temperature, prediction_length):
-
-    if os.path.exists(model_filepath):
-        model.load_state_dict(torch.load(model_filepath))
-    else:
-        raise ValueError('Model file not found.')
-
+def generate(model_state, model, temperature, prediction_length):
+    model.load_state_dict(model_state)
+    
     # zero out hidden weights to prime the network
     model.batch_size = 1
     generate_hidden = model.initialize_hidden()
@@ -201,17 +197,20 @@ def generate(model_filepath, model, temperature, prediction_length):
         if h.GPU:
             input_char = input_char.cuda()
 
-        output, generate_hidden = model(input_char, generate_hidden)
+        output, generate_hidden, recurrent_output = model(input_char, generate_hidden)
 
     output_char = first_chars[-1]
     output_int = h.char2int_cypher[output_char]
     predicted_chars = first_chars
+    hidden_activations = []
     for i in range(prediction_length):
         input_char = Variable(torch.LongTensor([output_int])).view(1, -1)
         if h.GPU:
             input_char = input_char.cuda()
 
-        output, generate_hidden = model(input_char, generate_hidden)
+        output, generate_hidden, recurrent_output = model(input_char, generate_hidden)
+        recurrent_output = recurrent_output.view(-1)
+        hidden_activations.append(recurrent_output.cpu().data.numpy())
 
         #???????
         softmax_dist = torch.nn.functional.softmax(output/temperature)
@@ -221,5 +220,5 @@ def generate(model_filepath, model, temperature, prediction_length):
         predicted_chars += output_char
 
     print("final output = ", predicted_chars)
-    return 1
+    return predicted_chars[len(first_chars):],np.array(hidden_activations)
 

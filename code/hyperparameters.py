@@ -2,14 +2,14 @@ import torch
 
 
 ### HYPERPARAMETERS
-sequence_length = 40
+sequence_length = 50
 input_size = output_size = sequence_length
-num_hidden_layers = 1
-hidden_size = 100
+num_hidden_layers = 3
+hidden_size = 128
 epochs = 300
-batch_size = 1000
+batch_size = 100
 temperature = 1
-prediction_length = 500
+prediction_length = 600
 stop_criterion = 4 # if loss increases 3 times in a row
 overlap_data = False
 
