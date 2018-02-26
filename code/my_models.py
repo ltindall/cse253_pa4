@@ -5,6 +5,7 @@ import hyperparameters as h
 import copy
 import os
 import numpy as np
+import matplotlib.pyplot as plt
 
 class lstm_char_rnn(torch.nn.Module):
     def __init__(self, dict_size, hidden_size, num_hidden_layers, batch_size):
@@ -167,7 +168,12 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
             print('Finished reverting the model')
 
             # TODO plot the stuff
-
+            plt.plot(losses[phases[0]],label='Train')
+            plt.plot(losses[phases[1]],label='Validation')
+            plt.xlabel('Epochs')
+            plt.ylabel('Loss')
+            plt.legend()
+            plt.show()
             break
 
     return best_model_state, last_model_state
