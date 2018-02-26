@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class lstm_char_rnn(torch.nn.Module):
-    def __init__(self, dict_size, hidden_size, num_hidden_layers, batch_size):
+    def __init__(self, dict_size, hidden_size, num_hidden_layers, batch_size,dropout_prob=0):
         super(lstm_char_rnn, self).__init__()
 
         self.hidden_size = hidden_size
@@ -16,6 +16,7 @@ class lstm_char_rnn(torch.nn.Module):
         self.batch_size = batch_size
 
         self.encoder = torch.nn.Embedding(dict_size, hidden_size)
+        self.drop = torch.nn.Dropout(dropout_prob)
         self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers)
         self.decoder = torch.nn.Linear(hidden_size, dict_size)
 
@@ -116,7 +117,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
                 # sketch but i guess it works? Reset for each new sequence batch
                 outputs,_,_ = model(inputs, hidden0)
-                loss = h.loss_function(outputs, targets)
+                loss = h.loss_function(outputs/h.temperature, targets)
 
                 optimizer.zero_grad()
                 # backprop, and optimize
@@ -219,7 +220,7 @@ def generate(model_state, model, temperature, prediction_length):
         hidden_activations.append(recurrent_output.cpu().data.numpy())
 
         #???????
-        softmax_dist = torch.nn.functional.softmax(output/temperature)
+        softmax_dist = torch.nn.functional.softmax(output)
         output_int = int(torch.multinomial(softmax_dist,1).cpu().data[0].numpy())       
 
         output_char = h.int2char_cypher[output_int]
