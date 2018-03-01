@@ -184,7 +184,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
 
 ### Generic train method
-def generate(model_state, model, temperature, prediction_length, till_end=True):
+def generate(model_state, model, temperature, prediction_length, till_end=True, generate_file):
     model.load_state_dict(model_state)
     
     # zero out hidden weights to prime the network
@@ -236,6 +236,10 @@ def generate(model_state, model, temperature, prediction_length, till_end=True):
         output_char = h.int2char_cypher[output_int]
         predicted_chars += output_char
         i+=1
+
+    file = open(generate_file, "w")
+    file.write(predicted_chars)
+    file.close()
 
     print("final output = ", predicted_chars)
     return predicted_chars[len(first_chars):],np.array(hidden_activations)

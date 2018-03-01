@@ -22,7 +22,7 @@ training_set = inputs[split:]
 
 
 # create model
-lstm = my_models.lstm_char_rnn(dict_size, h.hidden_size, h.num_hidden_layers, batch_size=h.batch_size,h.GRU)
+lstm = my_models.lstm_char_rnn(dict_size, h.hidden_size, h.num_hidden_layers, batch_size=h.batch_size,GRU=h.GRU)
 init_hidden = lstm.initialize_hidden()
 if h.GPU:
     init_hidden = init_hidden.cuda()
@@ -41,6 +41,5 @@ last_model_dict = mods[1]
 torch.save(best_model_dict, h.save_file)
 torch.save(last_model_dict, h.save_file_progress)
 
-my_models.generate(h.save_file, lstm, h.temperature, h.prediction_length)
-
-my_models.generate(h.save_file_progress, lstm, h.temperature, h.prediction_length)
+my_models.generate(h.save_file, lstm, h.temperature, h.prediction_length, h.generate_best_file)
+my_models.generate(h.save_file_progress, lstm, h.temperature, h.prediction_length, h.generate_last_file)

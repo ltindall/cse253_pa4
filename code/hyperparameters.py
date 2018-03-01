@@ -43,3 +43,5 @@ loss_function = torch.nn.CrossEntropyLoss()
 save_file = 'pa4_model.txt'
 # if gpu crashes before we finish when we're doing many many epochs
 save_file_progress = 'pa4_model_before_stop.txt'
+generate_best_file = 'best_music.txt'
+generate_last_file = 'last_music.txt'
