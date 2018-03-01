@@ -6,7 +6,7 @@ sequence_length = 50
 input_size = output_size = sequence_length
 num_hidden_layers = 2
 hidden_size = 128
-epochs = 300
+epochs = 100
 batch_size = 1000
 temperature = 1
 stop_criterion = 4 # if loss increases 3 times in a row
@@ -18,7 +18,7 @@ validation_size = 0.2 # fraction of data to use as validation set
 ### function options
 overlap_data = False
 
-GRU = True
+GRU = False
 
 
 ### Start and end substitution for better learning
