@@ -181,7 +181,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
 
 ### Generic train method
-def generate(model_state, model, temperature, prediction_length):
+def generate(model_state, model, temperature, prediction_length, till_end=True):
     model.load_state_dict(model_state)
     
     # zero out hidden weights to prime the network
@@ -195,9 +195,9 @@ def generate(model_state, model, temperature, prediction_length):
 
     # prime the network
     if h.use_custom_startend:
-        first_chars = h.start_sub
+        first_chars = h.start_sub + '\nX'
     else:
-        first_chars = h.start_orig
+        first_chars = h.start_orig + '\nX'
 
     for ch in first_chars:
         input_char = Variable(torch.LongTensor([h.char2int_cypher[ch]])).view(1,-1)
@@ -210,7 +210,14 @@ def generate(model_state, model, temperature, prediction_length):
     output_int = h.char2int_cypher[output_char]
     predicted_chars = first_chars
     hidden_activations = []
-    for i in range(prediction_length):
+    i=0
+    while True:
+        if not till_end and i >= prediction_length:
+            # stop at set point, otherwise keep generating till an end
+            break
+        if till_end and output_char == h.end_sub:
+            break
+            
         input_char = Variable(torch.LongTensor([output_int])).view(1, -1)
         if h.GPU:
             input_char = input_char.cuda()
@@ -225,7 +232,45 @@ def generate(model_state, model, temperature, prediction_length):
 
         output_char = h.int2char_cypher[output_int]
         predicted_chars += output_char
+        i+=1
 
     print("final output = ", predicted_chars)
     return predicted_chars[len(first_chars):],np.array(hidden_activations)
 
+
+def visualize(predicted_chars, hidden_activations, map_width, map_height):
+    """
+    Function to visualize
+    input:
+        <str> predicted_chars: the string predicted by generating with our model
+        <np.array> hidden_activations: the activations for each predicted character
+            (prediction_size x hidden_size)
+    """
+    special_chars = {'\n':'nl', ' ':'sp'}
+
+    # some preprocessi
+
+    for i in hidden_activations.T: 
+        data = i.reshape(map_height, map_width)
+
+        plt.figure(figsize = (10,10))
+        heatmap = plt.pcolor(data,cmap='bwr')
+
+        for row in range(data.shape[0]):
+            for col in range(data.shape[1]):
+                try:
+                    predicted_char = predicted_chars[row*h.map_width + col]
+                except Exception as e:
+                    break
+                if predicted_char in special_chars: 
+                    predicted_char = special_chars[predicted_char]
+
+                plt.text(col + 0.5, row + 0.5, predicted_char,
+                    horizontalalignment='center',
+                    verticalalignment='center',fontsize = 12)
+        plt.colorbar(heatmap)
+
+        plt.show()
+    
+    
+    

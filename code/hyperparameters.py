@@ -9,10 +9,11 @@ hidden_size = 128
 epochs = 300
 batch_size = 100
 temperature = 1
-prediction_length = 600
 stop_criterion = 4 # if loss increases 3 times in a row
 
 validation_size = 0.2 # fraction of data to use as validation set
+
+
 
 ### function options
 overlap_data = False
@@ -27,6 +28,9 @@ end_sub = ';'
 start_orig = '<start>'
 end_orig = '<end>'
 
+prediction_length = 600
+till_end = False
+map_width = 20
 
 ### Pytorch stuff
 GPU = torch.cuda.is_available()
