@@ -248,8 +248,6 @@ def visualize(predicted_chars, hidden_activations, map_width, map_height):
     """
     special_chars = {'\n':'nl', ' ':'sp'}
 
-    # some preprocessi
-
     for i in hidden_activations.T: 
         data = i.reshape(map_height, map_width)
 
@@ -259,7 +257,7 @@ def visualize(predicted_chars, hidden_activations, map_width, map_height):
         for row in range(data.shape[0]):
             for col in range(data.shape[1]):
                 try:
-                    predicted_char = predicted_chars[row*h.map_width + col]
+                    predicted_char = predicted_chars[row*map_width + col]
                 except Exception as e:
                     break
                 if predicted_char in special_chars: 
