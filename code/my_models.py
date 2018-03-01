@@ -46,7 +46,7 @@ class lstm_char_rnn(torch.nn.Module):
 
 ### Generic Train Function
 def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
-          hidden0, force_epochs=False, cell0=None):
+          hidden0, force_epochs=False):
     """
     Generic train function
     input:
