@@ -18,7 +18,7 @@ validation_size = 0.2 # fraction of data to use as validation set
 ### function options
 overlap_data = False
 
-
+GRU = False
 
 
 ### Start and end substitution for better learning

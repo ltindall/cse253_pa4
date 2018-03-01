@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class lstm_char_rnn(torch.nn.Module):
-    def __init__(self, dict_size, hidden_size, num_hidden_layers, batch_size,dropout_prob=0):
+    def __init__(self, dict_size, hidden_size, num_hidden_layers, batch_size,dropout_prob=0,GRU=True):
         super(lstm_char_rnn, self).__init__()
 
         self.hidden_size = hidden_size
@@ -17,7 +17,10 @@ class lstm_char_rnn(torch.nn.Module):
 
         self.encoder = torch.nn.Embedding(dict_size, hidden_size)
         self.drop = torch.nn.Dropout(dropout_prob)
-        self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers)
+	if GRU:
+		self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
+	else:
+		self.recurrent = torch.nn.LSTM(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
         self.decoder = torch.nn.Linear(hidden_size, dict_size)
 
     def forward(self, inputs, hidden):
@@ -227,7 +230,7 @@ def generate(model_state, model, temperature, prediction_length, till_end=True):
         hidden_activations.append(recurrent_output.cpu().data.numpy())
 
         #???????
-        softmax_dist = torch.nn.functional.softmax(output)
+        softmax_dist = torch.nn.functional.softmax(output/temperature)
         output_int = int(torch.multinomial(softmax_dist,1).cpu().data[0].numpy())       
 
         output_char = h.int2char_cypher[output_int]

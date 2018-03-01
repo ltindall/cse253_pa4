@@ -16,13 +16,13 @@ h.int2char_cypher = int2char_cypher
 
 
 # define test and validation set
-split = int(len(inputs) * 0.1) # change 0.1 to how big we want validation set to be
+split = int(len(inputs) * h.validation_size) # change 0.1 to how big we want validation set to be
 validation_set = inputs[:split]
 training_set = inputs[split:]
 
 
 # create model
-lstm = my_models.lstm_char_rnn(dict_size, h.hidden_size, h.num_hidden_layers, batch_size=h.batch_size)
+lstm = my_models.lstm_char_rnn(dict_size, h.hidden_size, h.num_hidden_layers, batch_size=h.batch_size,h.GRU)
 init_hidden = lstm.initialize_hidden()
 if h.GPU:
     init_hidden = init_hidden.cuda()
