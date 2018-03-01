@@ -30,7 +30,8 @@ if h.GPU:
 
 optimizer_lstm = torch.optim.Adam(lstm.parameters(), lr=0.01)
 
-#train(model, optimizer, epochs, train_inputs, validation_set, chunk_size, hidden0)
+'''
+train(model, optimizer, epochs, train_inputs, validation_set, chunk_size, hidden0)
 mods = my_models.train(lstm, optimizer_lstm, h.epochs, training_set,
                        validation_set, h.sequence_length, init_hidden, force_epochs=True)
 
@@ -40,6 +41,6 @@ last_model_dict = mods[1]
 # save the best model dict to file in case we want to load it later and generate
 torch.save(best_model_dict, h.save_file)
 torch.save(last_model_dict, h.save_file_progress)
-
+'''
 my_models.generate(h.save_file, lstm, h.temperature, h.prediction_length, h.generate_best_file)
 my_models.generate(h.save_file_progress, lstm, h.temperature, h.prediction_length, h.generate_last_file)
