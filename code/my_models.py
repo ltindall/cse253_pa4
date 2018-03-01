@@ -21,6 +21,8 @@ class lstm_char_rnn(torch.nn.Module):
         if GRU:
             self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
         else:
+            print("LSTM working")
+	
             self.recurrent = torch.nn.LSTM(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
         self.decoder = torch.nn.Linear(hidden_size, dict_size)
 
@@ -33,8 +35,13 @@ class lstm_char_rnn(torch.nn.Module):
         return output, hidden, recurrent_output
 
     def initialize_hidden(self):
-        return Variable(torch.zeros(self.num_hidden_layers, self.batch_size,
+
+        if h.GRU: 
+            return Variable(torch.zeros(self.num_hidden_layers, self.batch_size,
                                     self.hidden_size))
+        else: 
+            return (Variable(torch.zeros(self.num_hidden_layers, self.batch_size, self.hidden_size)), 
+                    Variable(torch.zeros(self.num_hidden_layers, self.batch_size, self.hidden_size)))
 
 
 ### Generic Train Function
@@ -121,6 +128,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
                 # sketch but i guess it works? Reset for each new sequence batch
                 outputs,_,_ = model(inputs, hidden0)
+                 
                 loss = h.loss_function(outputs/h.temperature, targets)
 
                 optimizer.zero_grad()
@@ -199,7 +207,10 @@ def generate(model_state, model, temperature, prediction_length, generate_file, 
     generate_hidden = model.initialize_hidden()
 
     if h.GPU:
-        generate_hidden = generate_hidden.cuda()
+        if h.GRU: 
+            generate_hidden = generate_hidden.cuda()
+        else: 
+            generate_hidden = (generate_hidden[0].cuda(), generate_hidden[1].cuda())
 
     model.train(False)
 
