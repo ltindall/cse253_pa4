@@ -17,10 +17,11 @@ class lstm_char_rnn(torch.nn.Module):
 
         self.encoder = torch.nn.Embedding(dict_size, hidden_size)
         self.drop = torch.nn.Dropout(dropout_prob)
-	if GRU:
-		self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
-	else:
-		self.recurrent = torch.nn.LSTM(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
+
+        if GRU:
+            self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
+        else:
+            self.recurrent = torch.nn.LSTM(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
         self.decoder = torch.nn.Linear(hidden_size, dict_size)
 
     def forward(self, inputs, hidden):
@@ -184,8 +185,14 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
 
 
 ### Generic train method
-def generate(model_state, model, temperature, prediction_length, till_end=True):
-    model.load_state_dict(model_state)
+def generate(model_state, model, temperature, prediction_length, generate_file, till_end=True ):
+
+
+    if os.path.exists(model_state):
+        model.load_state_dict(torch.load(model_state))
+    else:
+        raise ValueError('Model file not found.')
+
     
     # zero out hidden weights to prime the network
     model.batch_size = 1
@@ -236,6 +243,10 @@ def generate(model_state, model, temperature, prediction_length, till_end=True):
         output_char = h.int2char_cypher[output_int]
         predicted_chars += output_char
         i+=1
+
+    file = open(generate_file, "w")
+    file.write(predicted_chars)
+    file.close()
 
     print("final output = ", predicted_chars)
     return predicted_chars[len(first_chars):],np.array(hidden_activations)

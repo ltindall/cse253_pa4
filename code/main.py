@@ -22,7 +22,7 @@ training_set = inputs[split:]
 
 
 # create model
-lstm = my_models.lstm_char_rnn(dict_size, h.hidden_size, h.num_hidden_layers, batch_size=h.batch_size,h.GRU)
+lstm = my_models.lstm_char_rnn(dict_size, h.hidden_size, h.num_hidden_layers, batch_size=h.batch_size,GRU=h.GRU)
 init_hidden = lstm.initialize_hidden()
 if h.GPU:
     init_hidden = init_hidden.cuda()
@@ -30,7 +30,8 @@ if h.GPU:
 
 optimizer_lstm = torch.optim.Adam(lstm.parameters(), lr=0.01)
 
-#train(model, optimizer, epochs, train_inputs, validation_set, chunk_size, hidden0)
+'''
+train(model, optimizer, epochs, train_inputs, validation_set, chunk_size, hidden0)
 mods = my_models.train(lstm, optimizer_lstm, h.epochs, training_set,
                        validation_set, h.sequence_length, init_hidden, force_epochs=True)
 
@@ -40,7 +41,6 @@ last_model_dict = mods[1]
 # save the best model dict to file in case we want to load it later and generate
 torch.save(best_model_dict, h.save_file)
 torch.save(last_model_dict, h.save_file_progress)
-
-my_models.generate(h.save_file, lstm, h.temperature, h.prediction_length)
-
-my_models.generate(h.save_file_progress, lstm, h.temperature, h.prediction_length)
+'''
+my_models.generate(h.save_file, lstm, h.temperature, h.prediction_length, h.generate_best_file)
+my_models.generate(h.save_file_progress, lstm, h.temperature, h.prediction_length, h.generate_last_file)
