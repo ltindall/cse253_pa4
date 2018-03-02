@@ -6,7 +6,7 @@ sequence_length = 25
 input_size = output_size = sequence_length
 num_hidden_layers = 3
 hidden_size = 100
-epochs = 50
+epochs = 10
 batch_size = 1000
 temperature = 1
 stop_criterion = 4 # if loss increases 3 times in a row
@@ -43,10 +43,10 @@ rnn_type = 'GRU' if GRU else 'LSTM'
 
 save_string = (rnn_type+'_'+str(num_hidden_layers)+'lay_'+str(hidden_size)+'unit_'
             +str(sequence_length)+'seq_'+str(batch_size)+'batch_'+str(epochs)
-            +'epoch_'+str(dropout)+'drop_'+str(temperature)+'temp'+'.txt')
+            +'epoch_'+str(dropout)+'drop_'+str(temperature)+'temp')
 
-save_file = ('bestmodel_'+save_string)
+save_file = ('bestmodel_'+save_string+'.txt')
 # if gpu crashes before we finish when we're doing many many epochs
-save_file_progress = ('lastmodel_'+save_string)
-generate_best_file = ('bestmusic_'+save_string)
-generate_last_file = ('lastmusic_'+save_string)
+save_file_progress = ('lastmodel_'+save_string+'.txt')
+generate_best_file = ('bestmusic_'+save_string+'.txt')
+generate_last_file = ('lastmusic_'+save_string+'.txt')

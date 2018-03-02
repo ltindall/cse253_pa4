@@ -198,6 +198,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
     plt.legend()
     plt.show()
     
+    np.save(h.save_string+'.npy', np.vstack((np.trim_zeros(np.array(losses[phases[0]])),np.trim_zeros(np.array(losses[phases[1]])))))
 
     return best_model_state, last_model_state
 
