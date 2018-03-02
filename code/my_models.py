@@ -21,8 +21,6 @@ class lstm_char_rnn(torch.nn.Module):
         if GRU:
             self.recurrent = torch.nn.GRU(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
         else:
-            print("LSTM working")
-	
             self.recurrent = torch.nn.LSTM(hidden_size, hidden_size, num_hidden_layers,dropout=dropout_prob)
         self.decoder = torch.nn.Linear(hidden_size, dict_size)
 
@@ -141,11 +139,14 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
                 running_loss += loss.data[0]
 
             # calculate the epoch loss, normalized by the number of batches
+            losses[phase_name].append(running_loss/batch_num)
+            '''
             if not force_epochs:
                 losses[phase_name].append(running_loss/batch_num)
             else:
                 losses[phase_name] = utils.shift_list(losses[phase_name],
                                                       running_loss/batch_num)
+            '''                                
 
             print('{} Loss:\t{}\n'.format(phase_name, losses[phase_name][-1]))
             # validation phase model saving, and early stopping
@@ -179,15 +180,24 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
             print('Reverting model to best model so far...')
             model.load_state_dict(best_model_state)
             print('Finished reverting the model')
-
+            
+            
             # TODO plot the stuff
-            plt.plot(losses[phases[0]],label='Train')
-            plt.plot(losses[phases[1]],label='Validation')
+            plt.plot(np.trim_zeros(np.array(losses[phases[0]])),label='Train')
+            plt.plot(np.trim_zeros(np.array(losses[phases[1]])),label='Validation')
             plt.xlabel('Epochs')
             plt.ylabel('Loss')
             plt.legend()
             plt.show()
             break
+    plt.plot(np.trim_zeros(np.array(losses[phases[0]])),label='Train')
+    plt.plot(np.trim_zeros(np.array(losses[phases[1]])),label='Validation')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.title("Loss vs Epochs")
+    plt.legend()
+    plt.show()
+    
 
     return best_model_state, last_model_state
 
@@ -297,3 +307,4 @@ def visualize(predicted_chars, hidden_activations, map_width, map_height):
     
     
     
+
