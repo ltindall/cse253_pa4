@@ -1,0 +1,18 @@
+$
+X:10
+T:AA died in the Alash:Sion Shady
+R:hornpipe
+Z:id:hn-mazurka-10
+M:3/4
+K:G
+DGGB d2ad|bafd edge:|2 dcAG A3|BGEF G2AF|
+GFE ~E3D|
+BAAB A2eA|BG~G2 Bd~d2|f2df e3f|gafd BedB|GD (3FGA BE (3ABG|DG|(3Bcd ec AddB|Adfe dcdA|FGAF DDEA|B2E2 e2ee|dcAG FGAG:|
+|:d2ef dcBA:|
+|:dcBA GABd g2ed|c<AA=c BAFA|GEDG ~G2Bd|cA~E2 BcdA|(3Bcd ed cAGA|FAde b2a|
+gfec dBAG|
+FAdB ABcA|dcdf edcB|AF~F2 EDB,D|
+B,ED ~A3B|~g3A BAF^F|1 BGFG A2B^c:|2 dAFG A2:|
+|:Bd|gdB G2FG|(3ABA G>A Bd fed | 
+gf/2c/2 | f2e | c3- | ezz:|
+;

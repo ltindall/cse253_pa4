@@ -1,0 +1,20 @@
+$
+X:49
+T:Risth la pirs
+C:Johngrney: Dansenx of Polkam's
+R:polka
+Z:Transcrit And I part.
+Z:id:hn-polka-19
+M:2/4
+L:1/8
+K:D
+|: eA A>B c>d | ed c>d | cz |
+V:2
+dA/G/ BG | FA Bd | fe fg|B>c d |e3 ec | g2 ||
+G>A DG | G2 |:|
+V:3e cB | G6 |: A2G2 |G2g>f efg | ecge gedB | B2 BAG | A3- A6 |
+P:Nobianscrite oha enceur four t's also fist planda, The
+R:slide2 andmy Mounkil Crosty Cabeeen :a Mcvetemile,
+H:Relided O'The Runet Rome Lunuse, To Trin the Mancy
+G,B,,,B,,D,D, | G,,2D,4,2G,,2E,4D,22D,2|2,4G,4,4|G,4]|B4_B474
+;

@@ -1,0 +1,12 @@
+$
+X40
+T:Slilighpe
+Z:id:hn-jig-79
+M:6/8
+K:G
+G2D G3||
+|:AFDD FAFG|=c(d2efef|g2af gfed|1 edB^c d2B2|A2g2 G2^GA|Bddd e2Bd|1 edBc d2cA|dafd BeB2|dB (3cde ecAc|cBAA BABd|eggg bage|=b2fd g2eB|AFGD G2^FG|AG FA|eAfe e=fgf|ecAc a2eg|
+~a3g efdc|dBAG ABc=B|AAG GFgf|e2e2 fdef gedB||
+|:fegd dcBc|(3BcB AG DGFG|ABAc AFDD|df eg fece|dgee dedF|~D3F EFAF|~A3G AGEA|GBde fA:|
+(3dAB (3ABA|]
+;

@@ -1,0 +1,17 @@
+$
+X60
+T:Rondeare vai-zurs
+M:5/4
+L:1/8
+N:The tune Conep observation mailto:galouvielle@free.fr
+Z:Pour toute observation mailto:galouvielle@free.fr
+M:2/4
+L:1/8
+K:F
+A>B E/F/GA|B2G B2d|ed/c/d cA|:AA B/c/d/c/d|~g3 bag|fag fed|Bcd AGE|A>Ac EFE|DED DFA|GEDE FEDF|GEAG A2 (3FED|cd (3B^cd e2 (3def|
+g2ec cecA|dcde ~f3d|(3efe (3cde fead|eA~A2 eAce:|2A2A2 c4|]
+|:f2AG c2cG|F2AB cBcA|G2GF E2 (3DED||
+P:Variations:
+|:g2|eage ^fgaf|g2gabf fgfe|~f3g eBec|eABc d2ed|c2B6 | B2B2 B2AG|
+A2cA AcA|Bcde fedc|B2G2 G2:|
+;

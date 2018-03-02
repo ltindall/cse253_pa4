@@ -1,0 +1,21 @@
+$
+X:9
+T:Gromaznnan
+D:Hiss'shance Stnon's Bris FzInd I it on Do ra?gouss ? pas he Hogunet Paug Wass 193
+Z:id:hn-jig-79
+M:3/4
+L:1/8
+K:C
+~B3 E2A GAB :| G2g g2d | cAG A2F | G2F GEF | A2D FEF ||1"G"Dz|"G"GA B2|]
+K:Gmaj
+E2GE GEFE ~E3F|~G3B dB~B2|cADE A2Bd|~a2gf edcB|AFDF EcBA|dfag (3fafe | d2B2c2d2 | c2c2d2 defg|fedc|B2ed/2c2B2|d2|
+df/2e/2c/2 |
+g2 "G"e/2d/2B/| c/A/G/E/|F2 AC|"Em"B2BG|G2BG D2FG|(3A^FGA G2AB|cAA2GD|
+~E3G GBd|~e3d ed^cdc|dBGB A2FA|
+BcdA B2dc|cAAB G2cB|AdcB c2g2 :|
+~f3a agece| d4d^F |
+A2Aa (3fef g2g2|
+a2ab agfa|
+dged BABA|BAGB AFDB |
+GBdc d2d2 | (3Bcd Bd | e4cA | B6|1 Bcde BdBA|1 BAAG A6:|
+;

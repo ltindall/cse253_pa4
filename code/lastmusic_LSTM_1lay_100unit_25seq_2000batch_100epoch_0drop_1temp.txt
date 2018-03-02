@@ -1,0 +1,5 @@
+$
+X:3/4
+K:G
+f2g2 | c3B | A4 ^c2d | d>cBB | cAA>B | c2Ac | B BAB | cB BA|1 BA G2 :|
+;

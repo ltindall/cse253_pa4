@@ -1,0 +1,20 @@
+$
+XV:8
+D:Maire O'Keefe
+O:France
+Z:Dave Hordent: The Ducender Quaker, The
+R:polka
+D:Mary Brigog, son polka, The
+T:Ed is (1956)
+D:Mairgafbericairdir
+T:Durt of the bon, #663
+H:See also #380
+D:Kevin Ennin's Trim's March, 
+W:The ren-trai Uag?e
+M:3/4
+R:Bourree
+L:1/8
+K:c
+AG |: F [P:A] F2 GF |
+E2E GAB | cAB cdc |1 dec d3 :|2 d3 cBA :|
+;
