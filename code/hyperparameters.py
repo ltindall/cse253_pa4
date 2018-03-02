@@ -2,18 +2,18 @@ import torch
 
 
 ### HYPERPARAMETERS
-sequence_length = 50
+sequence_length = 25
 input_size = output_size = sequence_length
-num_hidden_layers = 2
-hidden_size = 128
-epochs = 100
+num_hidden_layers = 3
+hidden_size = 100
+epochs = 50
 batch_size = 1000
 temperature = 1
 stop_criterion = 4 # if loss increases 3 times in a row
 
 validation_size = 0.2 # fraction of data to use as validation set
 
-
+dropout = 0
 
 ### function options
 overlap_data = False
@@ -38,10 +38,15 @@ print("GPU is {}enabled ".format(['not ', ''][GPU]))
 
 loss_function = torch.nn.CrossEntropyLoss()
 
-
+rnn_type = 'GRU' if GRU else 'LSTM'
 ### model saving file paths
-save_file = 'pa4_model.txt'
+
+save_string = (rnn_type+'_'+str(num_hidden_layers)+'lay_'+str(hidden_size)+'unit_'
+            +str(sequence_length)+'seq_'+str(batch_size)+'batch_'+str(epochs)
+            +'epoch_'+str(dropout)+'drop_'+str(temperature)+'temp'+'.txt')
+
+save_file = ('bestmodel_'+save_string)
 # if gpu crashes before we finish when we're doing many many epochs
-save_file_progress = 'pa4_model_before_stop.txt'
-generate_best_file = 'best_music.txt'
-generate_last_file = 'last_music.txt'
+save_file_progress = ('lastmodel_'+save_string)
+generate_best_file = ('bestmusic_'+save_string)
+generate_last_file = ('lastmusic_'+save_string)
