@@ -1,0 +1,29 @@
+$
+X:1
+T:Suillen's
+R:jig
+D:Paddy's Morlign
+R:Scotrous chown pis.
+Z:id:hn-reel-4
+M:C|
+K:G
+D2 DE|A4A2|(3ABc dBBd|^cAGA |
+~A3d B2B^c|dfef gefg|
+gabag agfec | BA (3BAG GB | AGEF G3d |  | {A}B2zz ||
+P:varitrm
+H:Beha W: Thy une tes Jeentuuntis thor to Slimes fromet Ballaid Arrch
+Z:id:hn-reel-1
+M:C|
+K:G
+V:1
+A|BAF ABc B2 AB | BA G>d:|2 ef g2|dB AG/A/|BA G2|:"Gm"E2GB/d/ :|
+|:Bc d2 | e2g2 ||
+g2eg (3dcd :| 
+B,2E>F G2B | A2G E2F | GAE E2G|: ece edd |
+fgg2 gfgf|
+(3efg fde2 :|
+D2 G2 | d2 cB | A2 A2 | E2D ~G3 ||
+P:variations:
+|:z2|B3c cefg||
+M:3/1|1 "G"G g/2f/2 ||
+;

@@ -1,0 +1,21 @@
+$
+X:1
+T:Dundon Ryan: The Bomas Paddy's
+R:jig
+C:Provence
+C:Pattro
+R:polka: at il Dassed, Polo Magfiep, Seal ome, The
+R:mazurka
+C:Mzurtinot Donk of Lout Rofdfaf brerole. pire", The
+R:reel
+D:Deflinkie, Fheeaon's Sul, The
+R:Maring, The
+R:air
+R:hornpipe
+H:Botha) Neat, E
+Z:id:hn-hornpipe-52
+M:C|
+K:D
+D2af b2ab|afbf ~A3f|gfed Bdga|gfed dcAG|FGAB cBGB|defd fAA2|Bgfe d2 (3gfe|d2 GGFA BAGA|BAG2 B4:|2GA d2 | cdef gfeg | (3faf dc Bzge|cdec dfec|(3ABc A2gf efdB|defa agaf|geeg agef|~g2af geec|df~e2 fded|(3ABA BG GB (3AAG Ageg:|2 f2af a2 g2|f2f2 d2ef|e2e2 e2ef|gdBd Bgfe|
+dg (3efg d2 dg:|2 d2aa bafd|(3efe (3dcB (3cdc (3Bcd eg | =fed deeg | ~f3e ecAc | ~B3c BAGF :|
+;

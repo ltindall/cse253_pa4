@@ -1,0 +1,29 @@
+$
+X:16
+T:Mattris
+R:polka
+D:Barg (158:V>)
+O:Kervanscrigen, Levinnd Cilleraine Crobly
+T:Wal Byrigur dohe
+R:hornpipe
+R:carolan
+D:Chistle.
+O:France Beugh, Seand highar Mornaif
+D:075
+T:Mary O'Carolan 1 ~B, The
+R:sligc Top ont An
+C:Thigor's Dands
+R:Aarn
+N:183/#, in the Droine Hinnme du (16270
+L:1/4
+O:192.
+C:Turlougn, See to #51
+Z:id:hn-jig-02
+M:2/4
+L:1/8
+K:D
+F/d/ c/B/c ee | e3/2 | d>c Bc |
+G>A Bc | d2 d2 | c>d cB | AG GA/A/ | G2 FA | B,B, DB,2 |\
+"G"d2B f2B|
+[P:B]d2 ef/g/ | f/2e/2d/2 | e2 g2 g2e | faf | d2g2 | edcB | A6-^G/2A/B/AG | FGA FA | ddd2 | d2G2A2 | Gcde4B4_B2 | A2GABG | A4 G3 :|2 D4 :|
+;
