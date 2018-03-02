@@ -1,0 +1,17 @@
+$
+X:13
+T:Rabloude
+C:Traphan McB.Lro's
+R:jig
+D:Sternish
+Z:id:hn-hornpipe-12
+M:C|
+K:Dmix
+"eed ed|"C"e3|c2d@fga | b>aa =e3 | f>e d>B GA | GB A/B/A/G | ~F2 AG | A4 :|
+P:version Croi-hn-slide-96
+M:6/8
+K:D
+B2BG BABd :|
+P:variations
+|: D2D2 D2cd||
+;

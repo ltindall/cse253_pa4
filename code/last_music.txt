@@ -1,0 +1,35 @@
+$
+X:19
+T:Concent in the Ador, of #369, Fnwunl Tonn's Flite do by Bramilling
+R:mapwe Mughlina#28.
+H:O'Gergft?
+BB B/A/B/d/ | cd ed Bd |
+eAe ege efe dBG | A2B cAG | FED ABA | ~A3 dcB AFA | cde fed | c2d cAG |
+A^G ABA | dcA B2d | c6 c2 | AG BAG AFB | d2d c2A | g3 eg | ag e^g agf | gd f/c/f/2 | g ef ee | fa e/g/e/ ed | c2c :|2 A2 B/2c/2|"G7"G/A/G A2:|
+"B\"gB "B\
+"C"C2 "C"c2G ABG | AB c/d/e/mace Siat, The
+R:march
+T:Munster's Chuid is (Tinkes' Whistle on the irigh to Limomon't Come
+R:polka
+D:Michael Bootley, Piel
+T:Morl ovil Bantre Muvide, The
+R:hornpipe
+Z:id:hn-marchTer qunis by Molly
+R:Branle ain Graddy Boy
+R:march
+Z:id:hn-slide-41
+M:6/8
+K:Dmix
+dfd dfg d2e | fga faf | ecA AFA | f/f/f/de d2d | edB G2A |
+d2B ABd | e3 dcA | A2F D2F | E2d B2B |
+cdc cBA :|
+P:variations
+|:~d3 cBA|cde cAA|BAG|G2A Bcd|B2e e2d|a2d cBA|B2E EFA|dfdf d2fB|efdc d2BB|d2dc dedB|AGEF ~E3F|GBdB ~A3B|A<BAB d3e|dcdB AGEG|Addc d2ed|cAce dBGB|AGFG A2Bd|geaf edBG|effe dcBA G2:|
+B2AB AEFG|ABcA EABc|dgge dBAB|c2Bc dABG|AGAB AGAB|c2d2 BAFG|E2ED|=F3G EBeB|~G3 Bcd|ege cde|
+BAB cdc|cd/e/b/ g2g2|e2 ef|ga ge|d3 de|c3 e>c|1 eg Bd | BB gB | ABA | A3 | G3E2 | F4 | G2 z/2F/2 | Bd ef gd | ag e/g/e/c/ | d2 ed/c/ | d2 ed c2 | ed ed | c3 | ce/B/A/B/ GEd | Bed | cB ez B2 Bc |
+B2 AB/c/ | d/2e/2d/2c/2d_e2+g3encz | Bc d4 :|2 g3e fdc | B2A || d2B2 | dcBc | dedB^|d2g2 ||
+|: ed c2 | B2 G2 : BA2GA | B2zz zz |] "F2 z2 A2 AG |   F4 | GF E>F | G>F Fd | e2 AE |
+(3AGF EF G2AG | BAGB A2cd | ecA cBA :| 
+[P:B
+GBB Bcd|1 cAA BAG | FED cBA | G3 G2A | BGA Bcd :|
+;
