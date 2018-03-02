@@ -1,0 +1,8 @@
+$
+X1
+T:OneFwielle
+Z:id:hn-jig-96
+M:6/8
+K:G
+d2B B2B|A2B A2B|1 A2F A2A cAG||
+;

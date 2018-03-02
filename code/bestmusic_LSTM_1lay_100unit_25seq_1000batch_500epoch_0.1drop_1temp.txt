@@ -1,0 +1,20 @@
+$
+X:11
+T:Pakves ond Irife
+Z:id:hn-mazurkactanaiel Tumer's reel Pollent un: Nest
+Z:hn-se-tman?
+R:jig
+C:Malsy
+R:carolan
+C:Turneas
+R:Donchn-bolka-12
+M:6/8
+L:1/8
+K:D
+cz ABc | ded B2c g2f ||
+e2f edB dBG | A2F E2F | E3 :|
+|:A2 D2 | G4 c2 g2 |
+dg e/A/ d>e|dB BA|G/D/F/E/G/ FA/f/||
+g2 ed Bd g2|
+a2 a/f/g/e/|de/f/ ed|cB AB|G>A GFG|AB/A/ GB|de dB|AF EF/B/:|2 ED FD/F/|BA GE||
+;

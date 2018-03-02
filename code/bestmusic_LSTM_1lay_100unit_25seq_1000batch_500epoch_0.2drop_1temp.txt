@@ -1,0 +1,17 @@
+$
+X:33
+T:Bockhons
+Z:Transcrit an Denw
+Z:<afasnys (3f2b2 e2ad^b] (3abc'(3aga (3fge fef (3g~g2 fedf||
+w:hne you the Beol
+Z:id:hn-mazurka-92
+M:3/4
+L:1/4
+L:1/8
+K:D
+AED | D3 | D2F2 D2F2 :|2 F2A2 A2GA|A2FA d2ed|=cEBA GED|1 DDF Bcd:|2 ~d3 edc|daf fed|1 efd f3 |1 d2e dcB GAB c2A2 |
+eaag fdff | edfa gfd2 | c3B | A2fe d2 (3cde :|
+f2ag edBc|defg ecAB|c2A2 ABc>d|(3cec dBA BAFA|fded cABd|baag aege|dcAB GEEG|AFEF G2A || ~B3 Ace |
+d2B A2 DG:|2 FDE F2D|1 DED D3|DdB d2A Bcd|eaa agf|a2b aga beaf|fdcB Acec|1de)
+W:Le Et wout ue Marcy Tickt tpand Polke/ou" GEA, F,E, | G,,/F,D, | E,>E F,,A, C,2 | E,2G,2 G,2G,|A,2B HE2:|
+;
