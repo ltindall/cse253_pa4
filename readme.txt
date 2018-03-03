@@ -1,3 +1,9 @@
+Guide for use: 
+cd code
+# edit hyperparameters.py to your liking
+python main.py
+
+
 
 Code for this project can be found in ./code
 Data is is ./data
