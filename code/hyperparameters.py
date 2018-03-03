@@ -7,7 +7,7 @@ input_size = output_size = sequence_length
 num_hidden_layers = 1
 hidden_size = 100
 epochs = 100
-batch_size = 2000
+batch_size = 1000
 temperature = 1
 stop_criterion = 4 # if loss increases 3 times in a row
 
