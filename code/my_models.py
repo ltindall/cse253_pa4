@@ -181,6 +181,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
             model.load_state_dict(best_model_state)
             print('Finished reverting the model')
             
+            '''
             
             # TODO plot the stuff
             plt.plot(np.trim_zeros(np.array(losses[phases[0]])),label='Train')
@@ -190,6 +191,10 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
             plt.legend()
             plt.show()
             break
+            '''
+
+    # uncomment the following block to plot loss during training
+    '''
     plt.plot(np.trim_zeros(np.array(losses[phases[0]])),label='Train')
     plt.plot(np.trim_zeros(np.array(losses[phases[1]])),label='Validation')
     plt.xlabel('Epochs')
@@ -197,6 +202,7 @@ def train(model, optimizer, epochs, train_set, validation_set, chunk_size,
     plt.title("Loss vs Epochs")
     plt.legend()
     plt.show()
+    '''
     
     np.save('../losses/'+h.save_string+'.npy', np.vstack((np.trim_zeros(np.array(losses[phases[0]])),np.trim_zeros(np.array(losses[phases[1]])))))
 
