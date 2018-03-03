@@ -1,9 +1,0 @@
-$
-X:85
-T:Case conts: 2ad.or
-C:Madorist> Augh in du fol Gror, The
-R:slip jig
-H:See also #21
-R:setabrand Muly"2
-|:B2A BAG|BAGA BAGE|DDEF DEFE|cBcd edec|~A3B AFDF|~D3A DFAG|gfef ~e3A|(3Bcd ef ~g3b|a2ge fdef|gabg afff|eAAB ^cA~A2|BGGF G2:|
-;

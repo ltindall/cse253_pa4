@@ -4,10 +4,10 @@ import torch
 ### HYPERPARAMETERS
 sequence_length = 25
 input_size = output_size = sequence_length
-num_hidden_layers = 3
+num_hidden_layers = 1
 hidden_size = 100
-epochs = 10
-batch_size = 1000
+epochs = 100
+batch_size = 2000
 temperature = 1
 stop_criterion = 4 # if loss increases 3 times in a row
 
@@ -18,7 +18,7 @@ dropout = 0
 ### function options
 overlap_data = False
 
-GRU = False
+GRU = True
 
 
 ### Start and end substitution for better learning
@@ -41,7 +41,7 @@ loss_function = torch.nn.CrossEntropyLoss()
 rnn_type = 'GRU' if GRU else 'LSTM'
 ### model saving file paths
 
-save_string = (rnn_type+'_'+str(num_hidden_layers)+'lay_'+str(hidden_size)+'unit_'
+save_string = ('adam_'+rnn_type+'_'+str(num_hidden_layers)+'lay_'+str(hidden_size)+'unit_'
             +str(sequence_length)+'seq_'+str(batch_size)+'batch_'+str(epochs)
             +'epoch_'+str(dropout)+'drop_'+str(temperature)+'temp')
 

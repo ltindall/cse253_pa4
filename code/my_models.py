@@ -271,8 +271,8 @@ def generate(model_state, model, temperature, prediction_length, generate_file, 
     file.close()
 
     print("final output = ", predicted_chars)
-    return predicted_chars[len(first_chars):],np.array(hidden_activations)
-
+    #return predicted_chars[len(first_chars):],np.array(hidden_activations)
+    return predicted_chars,np.array(hidden_activations)
 
 def visualize(predicted_chars, hidden_activations, map_width, map_height):
     """
@@ -286,6 +286,9 @@ def visualize(predicted_chars, hidden_activations, map_width, map_height):
 
     for i in hidden_activations.T: 
         data = i.reshape(map_height, map_width)
+        
+        #data = np.flipud(data)
+        
 
         plt.figure(figsize = (10,10))
         heatmap = plt.pcolor(data,cmap='bwr')
@@ -303,6 +306,7 @@ def visualize(predicted_chars, hidden_activations, map_width, map_height):
                     horizontalalignment='center',
                     verticalalignment='center',fontsize = 12)
         plt.colorbar(heatmap)
+        plt.gca().invert_yaxis()
 
         plt.show()
     

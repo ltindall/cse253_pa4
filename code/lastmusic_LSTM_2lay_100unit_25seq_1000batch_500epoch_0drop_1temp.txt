@@ -1,8 +1,0 @@
-$
-X:97
-T:- ar own reel Done do hownaltinna
-Z:id:hn-jig-48
-M:6/8
-K:AAord
-A :|2 c>B AF G2A Bcd | g2e d2BA :|
-;
